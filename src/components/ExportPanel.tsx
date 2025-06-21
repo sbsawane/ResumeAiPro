@@ -42,54 +42,54 @@ export const ExportPanel: React.FC<ExportPanelProps> = ({ resume }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6">
+    <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6">
       <div className="flex items-center space-x-3 mb-6">
-        <Download className="w-6 h-6 text-blue-600" />
-        <h3 className="text-xl font-semibold text-gray-800">Export Resume</h3>
+        <Download className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
+        <h3 className="text-lg sm:text-xl font-semibold text-gray-800">Export Resume</h3>
       </div>
 
       <div className="space-y-4">
-        <p className="text-gray-600 text-sm">
+        <p className="text-gray-600 text-xs sm:text-sm">
           Download your resume in professional formats, optimized for ATS systems and hiring managers.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <button
             onClick={handleExportPDF}
             disabled={isExporting}
-            className="flex items-center justify-center space-x-3 p-4 border-2 border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center justify-center space-x-3 p-3 sm:p-4 border-2 border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isExporting && exportType === 'pdf' ? (
-              <Loader2 className="w-5 h-5 animate-spin text-blue-600" />
+              <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 animate-spin text-blue-600" />
             ) : (
-              <FileText className="w-5 h-5 text-red-600" />
+              <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-red-600" />
             )}
             <div className="text-left">
-              <div className="font-medium text-gray-800">Export as PDF</div>
-              <div className="text-sm text-gray-600">Best for online applications</div>
+              <div className="font-medium text-gray-800 text-sm sm:text-base">Export as PDF</div>
+              <div className="text-xs sm:text-sm text-gray-600">Best for online applications</div>
             </div>
           </button>
 
           <button
             onClick={handleExportDocx}
             disabled={isExporting}
-            className="flex items-center justify-center space-x-3 p-4 border-2 border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center justify-center space-x-3 p-3 sm:p-4 border-2 border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isExporting && exportType === 'docx' ? (
-              <Loader2 className="w-5 h-5 animate-spin text-blue-600" />
+              <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 animate-spin text-blue-600" />
             ) : (
-              <File className="w-5 h-5 text-blue-600" />
+              <File className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
             )}
             <div className="text-left">
-              <div className="font-medium text-gray-800">Export as DOCX</div>
-              <div className="text-sm text-gray-600">Editable Word document</div>
+              <div className="font-medium text-gray-800 text-sm sm:text-base">Export as DOCX</div>
+              <div className="text-xs sm:text-sm text-gray-600">Editable Word document</div>
             </div>
           </button>
         </div>
 
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-          <h4 className="font-medium text-blue-800 mb-2">Export Tips:</h4>
-          <ul className="text-sm text-blue-700 space-y-1">
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 sm:p-4">
+          <h4 className="font-medium text-blue-800 mb-2 text-sm sm:text-base">Export Tips:</h4>
+          <ul className="text-xs sm:text-sm text-blue-700 space-y-1">
             <li>• PDF format is recommended for most job applications</li>
             <li>• DOCX allows for easy editing and customization</li>
             <li>• Both formats are ATS-friendly and maintain proper formatting</li>

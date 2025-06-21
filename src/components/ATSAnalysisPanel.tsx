@@ -28,10 +28,10 @@ export const ATSAnalysisPanel: React.FC<ATSAnalysisPanelProps> = ({ analysis, is
 
   if (isAnalyzing) {
     return (
-      <div className="bg-white rounded-lg shadow-lg p-6">
+      <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6">
         <div className="flex items-center justify-center space-x-3 py-8">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-          <span className="text-gray-600">Analyzing your resume...</span>
+          <span className="text-gray-600 text-sm sm:text-base">Analyzing your resume...</span>
         </div>
       </div>
     );
@@ -39,11 +39,11 @@ export const ATSAnalysisPanel: React.FC<ATSAnalysisPanelProps> = ({ analysis, is
 
   if (!analysis) {
     return (
-      <div className="bg-white rounded-lg shadow-lg p-6">
+      <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6">
         <div className="text-center py-8">
           <Target className="w-12 h-12 text-gray-400 mx-auto mb-4" />
           <h3 className="text-lg font-semibold text-gray-800 mb-2">ATS Analysis</h3>
-          <p className="text-gray-600 mb-4">
+          <p className="text-gray-600 mb-4 text-sm sm:text-base">
             Paste a job description to get an ATS compatibility score and optimization suggestions.
           </p>
         </div>
@@ -52,15 +52,15 @@ export const ATSAnalysisPanel: React.FC<ATSAnalysisPanelProps> = ({ analysis, is
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6 space-y-6">
+    <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 space-y-6">
       {/* ATS Score */}
       <div className="text-center">
-        <div className={`inline-flex items-center justify-center w-24 h-24 rounded-full border-4 ${getScoreBgColor(analysis.score)} mb-4`}>
-          <span className={`text-2xl font-bold ${getScoreColor(analysis.score)}`}>
+        <div className={`inline-flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 rounded-full border-4 ${getScoreBgColor(analysis.score)} mb-4`}>
+          <span className={`text-xl sm:text-2xl font-bold ${getScoreColor(analysis.score)}`}>
             {analysis.score}
           </span>
         </div>
-        <h3 className="text-xl font-semibold text-gray-800 mb-2">ATS Compatibility Score</h3>
+        <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2">ATS Compatibility Score</h3>
         <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
           <div
             className={`h-2 rounded-full transition-all duration-300 ${getProgressColor(analysis.score)}`}
@@ -70,22 +70,22 @@ export const ATSAnalysisPanel: React.FC<ATSAnalysisPanelProps> = ({ analysis, is
       </div>
 
       {/* Analysis Breakdown */}
-      <div className="grid grid-cols-2 gap-4">
-        <div className="text-center p-3 bg-gray-50 rounded-lg">
-          <div className="text-lg font-semibold text-gray-800">{analysis.analysis.keywordDensity.toFixed(1)}%</div>
-          <div className="text-sm text-gray-600">Keyword Match</div>
+      <div className="grid grid-cols-2 gap-2 sm:gap-4">
+        <div className="text-center p-2 sm:p-3 bg-gray-50 rounded-lg">
+          <div className="text-base sm:text-lg font-semibold text-gray-800">{analysis.analysis.keywordDensity.toFixed(1)}%</div>
+          <div className="text-xs sm:text-sm text-gray-600">Keyword Match</div>
         </div>
-        <div className="text-center p-3 bg-gray-50 rounded-lg">
-          <div className="text-lg font-semibold text-gray-800">{analysis.analysis.formatScore}</div>
-          <div className="text-sm text-gray-600">Format Score</div>
+        <div className="text-center p-2 sm:p-3 bg-gray-50 rounded-lg">
+          <div className="text-base sm:text-lg font-semibold text-gray-800">{analysis.analysis.formatScore}</div>
+          <div className="text-xs sm:text-sm text-gray-600">Format Score</div>
         </div>
-        <div className="text-center p-3 bg-gray-50 rounded-lg">
-          <div className="text-lg font-semibold text-gray-800">{analysis.analysis.lengthScore}</div>
-          <div className="text-sm text-gray-600">Length Score</div>
+        <div className="text-center p-2 sm:p-3 bg-gray-50 rounded-lg">
+          <div className="text-base sm:text-lg font-semibold text-gray-800">{analysis.analysis.lengthScore}</div>
+          <div className="text-xs sm:text-sm text-gray-600">Length Score</div>
         </div>
-        <div className="text-center p-3 bg-gray-50 rounded-lg">
-          <div className="text-lg font-semibold text-gray-800">{analysis.analysis.readabilityScore}</div>
-          <div className="text-sm text-gray-600">Readability</div>
+        <div className="text-center p-2 sm:p-3 bg-gray-50 rounded-lg">
+          <div className="text-base sm:text-lg font-semibold text-gray-800">{analysis.analysis.readabilityScore}</div>
+          <div className="text-xs sm:text-sm text-gray-600">Readability</div>
         </div>
       </div>
 
@@ -93,14 +93,14 @@ export const ATSAnalysisPanel: React.FC<ATSAnalysisPanelProps> = ({ analysis, is
       {analysis.matchedKeywords.length > 0 && (
         <div>
           <div className="flex items-center space-x-2 mb-3">
-            <CheckCircle className="w-5 h-5 text-green-600" />
-            <h4 className="font-semibold text-gray-800">Matched Keywords</h4>
+            <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
+            <h4 className="font-semibold text-gray-800 text-sm sm:text-base">Matched Keywords</h4>
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1 sm:gap-2">
             {analysis.matchedKeywords.map((keyword, index) => (
               <span
                 key={index}
-                className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-green-100 text-green-800 border border-green-200"
+                className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-green-100 text-green-800 border border-green-200 break-words"
               >
                 {keyword}
               </span>
@@ -113,14 +113,14 @@ export const ATSAnalysisPanel: React.FC<ATSAnalysisPanelProps> = ({ analysis, is
       {analysis.missingKeywords.length > 0 && (
         <div>
           <div className="flex items-center space-x-2 mb-3">
-            <AlertCircle className="w-5 h-5 text-orange-600" />
-            <h4 className="font-semibold text-gray-800">Missing Keywords</h4>
+            <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" />
+            <h4 className="font-semibold text-gray-800 text-sm sm:text-base">Missing Keywords</h4>
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1 sm:gap-2">
             {analysis.missingKeywords.map((keyword, index) => (
               <span
                 key={index}
-                className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-orange-100 text-orange-800 border border-orange-200"
+                className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-orange-100 text-orange-800 border border-orange-200 break-words"
               >
                 {keyword}
               </span>
@@ -133,14 +133,14 @@ export const ATSAnalysisPanel: React.FC<ATSAnalysisPanelProps> = ({ analysis, is
       {analysis.suggestions.length > 0 && (
         <div>
           <div className="flex items-center space-x-2 mb-3">
-            <Lightbulb className="w-5 h-5 text-blue-600" />
-            <h4 className="font-semibold text-gray-800">Optimization Suggestions</h4>
+            <Lightbulb className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
+            <h4 className="font-semibold text-gray-800 text-sm sm:text-base">Optimization Suggestions</h4>
           </div>
           <ul className="space-y-2">
             {analysis.suggestions.map((suggestion, index) => (
               <li key={index} className="flex items-start space-x-2">
-                <TrendingUp className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
-                <span className="text-sm text-gray-700">{suggestion}</span>
+                <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                <span className="text-xs sm:text-sm text-gray-700 break-words">{suggestion}</span>
               </li>
             ))}
           </ul>

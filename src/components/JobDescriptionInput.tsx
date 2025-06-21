@@ -49,14 +49,14 @@ export const JobDescriptionInput: React.FC<JobDescriptionInputProps> = ({ onAnal
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6">
+    <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6">
       <div className="flex items-center space-x-3 mb-6">
-        <Briefcase className="w-6 h-6 text-blue-600" />
-        <h3 className="text-xl font-semibold text-gray-800">Job Description Analysis</h3>
+        <Briefcase className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
+        <h3 className="text-lg sm:text-xl font-semibold text-gray-800">Job Description Analysis</h3>
       </div>
 
       <div className="space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Job Title (Optional)
@@ -65,7 +65,7 @@ export const JobDescriptionInput: React.FC<JobDescriptionInputProps> = ({ onAnal
               type="text"
               value={jobTitle}
               onChange={(e) => setJobTitle(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
               placeholder="e.g., Senior Software Engineer"
             />
           </div>
@@ -77,7 +77,7 @@ export const JobDescriptionInput: React.FC<JobDescriptionInputProps> = ({ onAnal
               type="text"
               value={company}
               onChange={(e) => setCompany(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
               placeholder="e.g., Tech Corp"
             />
           </div>
@@ -88,11 +88,11 @@ export const JobDescriptionInput: React.FC<JobDescriptionInputProps> = ({ onAnal
             Job Description <span className="text-red-500">*</span>
           </label>
           <textarea
-            rows={12}
+            rows={8}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             onPaste={handlePaste}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base resize-y"
             placeholder="Paste the complete job description here...
 
 We're looking for a Senior Software Engineer to join our team. The ideal candidate will have:
@@ -107,7 +107,7 @@ We're looking for a Senior Software Engineer to join our team. The ideal candida
         <button
           onClick={handleAnalyze}
           disabled={!description.trim() || isAnalyzing}
-          className="w-full flex items-center justify-center space-x-2 bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+          className="w-full flex items-center justify-center space-x-2 bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors text-sm sm:text-base"
         >
           {isAnalyzing ? (
             <>
@@ -123,7 +123,7 @@ We're looking for a Senior Software Engineer to join our team. The ideal candida
 
         <div className="text-sm text-gray-600">
           <p className="mb-2">💡 <strong>Pro Tips:</strong></p>
-          <ul className="list-disc list-inside space-y-1 text-xs">
+          <ul className="list-disc list-inside space-y-1 text-xs sm:text-sm">
             <li>Paste the complete job posting for best results</li>
             <li>Include requirements, responsibilities, and preferred qualifications</li>
             <li>The analyzer will identify key skills and requirements automatically</li>

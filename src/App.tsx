@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FileText, BarChart3, Download, Sparkles } from 'lucide-react';
+import { FileText, BarChart3, Download, Sparkles, Menu, X } from 'lucide-react';
 import { ResumeForm } from './components/ResumeForm';
 import { ResumePreview } from './components/ResumePreview';
 import { ATSAnalysisPanel } from './components/ATSAnalysisPanel';
@@ -29,6 +29,7 @@ function App() {
   const [atsAnalysis, setAtsAnalysis] = useState<ATSAnalysis | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [activeTab, setActiveTab] = useState('editor');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const analyzer = new ATSAnalyzer();
 
@@ -78,14 +79,14 @@ function App() {
                 <Sparkles className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">ResumeAI Pro</h1>
-                <p className="text-sm text-gray-600">ATS-Optimized Resume Builder</p>
+                <h1 className="text-lg sm:text-xl font-bold text-gray-900">ResumeAI Pro</h1>
+                <p className="text-xs sm:text-sm text-gray-600 hidden sm:block">ATS-Optimized Resume Builder</p>
               </div>
             </div>
             
-            {atsAnalysis && (
-              <div className="flex items-center space-x-4">
-                <div className="text-right">
+            <div className="flex items-center space-x-4">
+              {atsAnalysis && (
+                <div className="text-right hidden sm:block">
                   <div className="text-sm text-gray-600">ATS Score</div>
                   <div className={`text-lg font-bold ${
                     atsAnalysis.score >= 80 ? 'text-green-600' : 
@@ -94,14 +95,61 @@ function App() {
                     {atsAnalysis.score}/100
                   </div>
                 </div>
-              </div>
-            )}
+              )}
+              
+              {/* Mobile menu button */}
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="md:hidden p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+              >
+                {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+            </div>
           </div>
         </div>
       </header>
 
-      {/* Tab Navigation */}
-      <div className="bg-white border-b border-gray-200">
+      {/* Mobile Navigation */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden bg-white border-b border-gray-200">
+          <div className="px-4 py-2 space-y-1">
+            {tabs.map(tab => {
+              const Icon = tab.icon;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => {
+                    setActiveTab(tab.id);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className={`w-full flex items-center space-x-3 px-3 py-2 rounded-md text-left ${
+                    activeTab === tab.id
+                      ? 'bg-blue-50 text-blue-600'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                  }`}
+                >
+                  <Icon className="w-5 h-5" />
+                  <span className="font-medium">{tab.title}</span>
+                </button>
+              );
+            })}
+            {atsAnalysis && (
+              <div className="px-3 py-2 border-t border-gray-200 mt-2">
+                <div className="text-sm text-gray-600">ATS Score</div>
+                <div className={`text-lg font-bold ${
+                  atsAnalysis.score >= 80 ? 'text-green-600' : 
+                  atsAnalysis.score >= 60 ? 'text-yellow-600' : 'text-red-600'
+                }`}>
+                  {atsAnalysis.score}/100
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Desktop Tab Navigation */}
+      <div className="hidden md:block bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex space-x-8">
             {tabs.map(tab => {
@@ -126,16 +174,16 @@ function App() {
       </div>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         {activeTab === 'editor' && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="space-y-6 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-8">
             <div className="space-y-6">
               <ResumeForm resume={resume} onUpdate={setResume} />
             </div>
             <div className="lg:sticky lg:top-8">
               <div className="bg-gray-50 p-4 rounded-lg">
                 <h3 className="text-lg font-semibold text-gray-800 mb-4">Live Preview</h3>
-                <div className="transform scale-75 origin-top">
+                <div className="transform scale-50 sm:scale-75 lg:scale-75 origin-top overflow-hidden">
                   <ResumePreview resume={resume} />
                 </div>
               </div>
@@ -144,7 +192,7 @@ function App() {
         )}
 
         {activeTab === 'analysis' && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="space-y-6 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-8">
             <div className="space-y-6">
               <JobDescriptionInput onAnalyze={handleAnalyzeResume} isAnalyzing={isAnalyzing} />
             </div>
@@ -155,14 +203,14 @@ function App() {
         )}
 
         {activeTab === 'export' && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="space-y-6 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-8">
             <div>
               <ExportPanel resume={resume} />
             </div>
             <div className="lg:sticky lg:top-8">
               <div className="bg-gray-50 p-4 rounded-lg">
                 <h3 className="text-lg font-semibold text-gray-800 mb-4">Export Preview</h3>
-                <div className="transform scale-75 origin-top">
+                <div className="transform scale-50 sm:scale-75 lg:scale-75 origin-top overflow-hidden">
                   <ResumePreview resume={resume} />
                 </div>
               </div>
